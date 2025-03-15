@@ -1,0 +1,14 @@
+// token.prisma
+model Token {
+  id         String   @id @default(uuid())
+  ownedById  String  
+  token      String   @db.Text
+  type       String
+  scopes     String
+  deviceName String 
+  deviceIp   String 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+  expiresAt  DateTime
+  owner      User     @relation(fields: [ownedById], references: [id])
+}
