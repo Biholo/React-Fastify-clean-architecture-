@@ -43,7 +43,6 @@ export class AuthApplicationUseCase {
                 password: hashedPassword
             });
 
-
             const tokens = await this.authService.generateTokens({
                 id: newUser.id,
                 email: newUser.email,

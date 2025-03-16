@@ -15,7 +15,7 @@ const EnvType = {
 /* ------------------------------- definition ------------------------------- */
 
 const envSchema = z.object({
-  PORT: EnvType.NUMBER.default(8080),
+  PORT: EnvType.NUMBER.default(3000),
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
@@ -24,9 +24,18 @@ const envSchema = z.object({
   ACCESS_TOKEN_EXPIRATION_IN_MS: EnvType.NUMBER.int().default(ONE_DAY),
   REFRESH_TOKEN_SECRET: EnvType.STRING,
   REFRESH_TOKEN_EXPIRATION_IN_MS: EnvType.NUMBER.int().default(ONE_MONTH),
-    RESET_PASSWORD_SECRET: EnvType.STRING,
-    RESET_PASSWORD_EXPIRATION_IN_MS: EnvType.NUMBER.int().default(ONE_HOUR),
+  RESET_PASSWORD_SECRET: EnvType.STRING,
+  RESET_PASSWORD_EXPIRATION_IN_MS: EnvType.NUMBER.int().default(ONE_HOUR),
+  MINIO_ENDPOINT: EnvType.STRING,
+  MINIO_PORT: EnvType.NUMBER,
+  MINIO_ROOT_USER: EnvType.STRING,
+  MINIO_ROOT_PASSWORD: EnvType.STRING,
+  MINIO_USE_SSL: EnvType.BOOLEAN,
+  MINIO_PUBLIC_URL: EnvType.STRING,
 });
+
+
+ 
 
 /* ----------------------------------- env ---------------------------------- */
 

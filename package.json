@@ -1,0 +1,10 @@
+{
+    "name": "twitter-project",
+    "version": "1.0.0",
+    "description": "",
+    "packageManager": "pnpm@9.15.3",
+    "scripts": {
+      "dev": "pnpm -r dev"
+    }
+  }
+  

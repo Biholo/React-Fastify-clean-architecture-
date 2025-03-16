@@ -1,0 +1,79 @@
+services:
+  # mysql:
+  #   image: mysql:8.0
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: fastify_template
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #   networks:
+  #     - app
+
+  # phpmyadmin:
+  #   image: phpmyadmin:latest
+  #   environment:
+  #     PMA_HOST: mysql
+  #     PMA_PORT: 3306
+  #   ports:
+  #     - "8080:80"
+  #   networks:
+  #     - app
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ROOTNAME
+      MINIO_ROOT_PASSWORD: ROOTPASS
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - app
+
+  # app:
+  #   build:
+  #     context: ./server
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - NODE_ENV=development
+  #     - DATABASE_URL=mysql://user:password@mysql:3306/fastify_template
+  #     - ENV_PORT=3000
+  #     - ACCESS_TOKEN_SECRET=access_token_secret
+  #     - REFRESH_TOKEN_SECRET=refresh_token_secret
+  #     - ACCESS_TOKEN_EXPIRATION_IN_MS=3600000
+  #     - REFRESH_TOKEN_EXPIRATION_IN_MS=86400000
+  #     - RESET_PASSWORD_SECRET=reset_password_secret
+  #     - RESET_PASSWORD_EXPIRATION_IN_MS=3600000
+  #     - MINIO_ENDPOINT=minio
+  #     - MINIO_PORT=9000
+  #     - MINIO_ROOT_USER=ROOTNAME
+  #     - MINIO_ROOT_PASSWORD=ROOTPASS
+  #     - MINIO_USE_SSL=false
+  #     - MINIO_PUBLIC_URL=http://localhost:9000
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
+  #   networks:
+  #     - app
+
+volumes:
+  # mysql_data:
+  minio_data:
+
+networks:
+  app:

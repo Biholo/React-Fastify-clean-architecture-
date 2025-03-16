@@ -7,6 +7,7 @@ async function main() {
   const server = await createServer();
 
   const connectionResult = await prisma.$connect();
+  
 
   try {
     await server.listen({ port: env.PORT, host: '0.0.0.0' });
